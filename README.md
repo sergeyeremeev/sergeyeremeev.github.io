@@ -23,4 +23,5 @@
   - **Impossible** = 25 * 20 => 500 points;
 5. There is no end to the game, so get as much points as you can and show your friends how awesome you are;
 6. If you want to reset your points, just refresh the page.
+
 ##Have Fun!!!
