@@ -6,6 +6,35 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="game-menu">
+        <div class="char-menu">
+            <h2>Select your character:</h2>
+            <ul>
+                <li><a href="#" class="boy" data-char="boy"><i></i>Boy</a></li>
+                <li><a href="#" class="cat-girl" data-char="cat-girl"><i></i>Cat Girl</a></li>
+                <li><a href="#" class="horn-girl" data-char="horn-girl"><i></i>Horn Girl</a></li>
+                <li><a href="#" class="pink-girl" data-char="pink-girl"><i></i>Pink Girl</a></li>
+                <li><a href="#" class="princess-girl" data-char="princess-girl"><i></i>Princess Girl</a></li>
+            </ul>
+        </div>
+        <div class="difficulty-menu">
+            <h2>Select difficulty level (affects speed and number of bugs):</h2>
+            <ul>
+                <li><a href="#" class="selected" data-difficulty="1"><span>casual</span> - one bug per lane, average speed (you can do it with your eyes closed)</a></li>
+                <li><a href="#" data-difficulty="2"><span>easy</span> - one bug per lane, high speed (might need to open your eyes for this one)</a></li>
+                <li><a href="#" data-difficulty="3"><span>normal</span> - two bugs per lane, average speed (getting tricky, right?)</a></li>
+                <li><a href="#" data-difficulty="4"><span>hard</span> - two bugs per lane, at high speed (noone said it's going to be easy)</a></li>
+                <li><a href="#" data-difficulty="5"><span>very hard</span> - three bugs per lane, average speed (bugs everywhere)</a></li>
+                <li><a href="#" data-difficulty="6"><span>insane</span> - three bugs per lane, high speed (good luck with this one)</a></li>
+                <li><a href="#" data-difficulty="7"><span>impossible</span> - THIS IS MADNESS</a></li>
+            </ul>
+        </div>
+        <div class="obstacles-settings">
+            <a href="#" class="obstacles-on-off">Turn Obstacles On/Off</a>
+            <a href="#" class="obstacles-reset">Reset Obstacles</a>
+        </div>
+    </div>
+    <script src="js/jQuery.js"></script>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
