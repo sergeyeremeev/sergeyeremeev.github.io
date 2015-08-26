@@ -1,0 +1,144 @@
+div {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-menu {
+    width: auto;
+    display: block;
+    overflow: hidden;
+    margin-bottom: -35px;
+}
+
+.game-menu h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #c35101;
+    text-decoration: underline;
+}
+
+.char-menu,
+.difficulty-menu,
+.obstacles-settings {
+    float: left;
+    width: 33%;
+    position: relative;
+    z-index: 2;
+}
+
+.char-menu ul,
+.difficulty-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.char-menu ul li,
+.difficulty-menu ul li {
+    width: 100%;
+}
+
+.char-menu ul {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.difficulty-menu ul {
+    width: 545px;
+    margin: 0 auto;
+}
+
+.char-menu a {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    color: darksalmon;
+    text-decoration: none;
+}
+
+.difficulty-menu a {
+    color: darksalmon;
+    text-decoration: none;
+    display: block;
+    height: 23px;
+    text-align: left;
+}
+
+.difficulty-menu a.selected {
+    text-decoration: underline;
+}
+
+.difficulty-menu a span {
+    font-weight: 700;
+}
+
+.obstacles-settings {
+    padding-top: 70px;
+}
+
+.obstacles-settings a {
+    margin: 0 auto;
+    display: block;
+    height: 36px;
+    width: 380px;
+    line-height: 36px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;
+    box-shadow: 1px 1px 5px -1px #bd5b21;
+}
+
+.obstacles-on-off {
+    background: #ff7070;
+    margin-bottom: 15px !important;
+}
+
+.obstacles-reset {
+    background: #f7967a;
+}
+
+.char-menu ul i {
+    display: inline-block;
+    width: 30px;
+    height: 33px;
+    margin-right: 15px;
+}
+
+.char-menu ul .boy i {
+    background: url(../images/char-boy.png);
+    background-size: 100%;
+    background-position: 0 -12px;
+}
+
+.char-menu ul .cat-girl i {
+    background: url(../images/char-cat-girl.png);
+    background-size: 100%;
+    background-position: 0 -12px;
+}
+
+.char-menu ul .horn-girl i {
+    background: url(../images/char-horn-girl.png);
+    background-size: 100%;
+    background-position: 0 -12px;
+}
+
+.char-menu ul .pink-girl i {
+    background: url(../images/char-pink-girl.png);
+    background-size: 100%;
+    background-position: 0 -12px;
+}
+
+.char-menu ul .princess-girl i {
+    background: url(../images/char-princess-girl.png);
+    background-size: 100%;
+    background-position: 0 -12px;
+}
