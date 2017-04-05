@@ -55,7 +55,7 @@
                 // menu button click
                 mpact.settings.menuBtn.on('click', mpact.onMenuClick);
 
-                // mousewheel event
+                // mousewheel/touchmove events
                 $(document).on('mousewheel touchmove', mpact.windowScrolling);
 
                 // hovering/clicking select sections
@@ -165,9 +165,23 @@
             // reworked scrolling
             windowScrolling: function (e) {
                 e.preventDefault();
+
                 if (!mpact.settings.isScrolling) {
                     mpact.settings.isScrolling = true;
-                    if (e.originalEvent.wheelDelta >= 0) {
+
+                    var scrollDown,
+                        currentY,
+                        lastY;
+
+                    if (e.type === 'mousewheel') {
+                        scrollDown = e.originalEvent.wheelDelta >= 0;
+                    } else if (e.type === 'touchmove') {
+                        currentY = e.originalEvent.touches[0].clientY;
+                        scrollDown = currentY > lastY;
+                        lastY = currentY;
+                    }
+
+                    if (scrollDown) {
                         if (mpact.checkHome() && mpact.settings.homeScreenFull) {
                             mpact.homeSlideLeft();
                         } else {
