@@ -27,6 +27,7 @@
 
                 // scrolling state
                 isScrolling: false,
+                startY: 0,
 
                 // host and advertiser
                 selectionScreen: $('.screen--host_advertiser'),
@@ -56,6 +57,7 @@
                 mpact.settings.menuBtn.on('click', mpact.onMenuClick);
 
                 // mousewheel/touchmove events
+                $(document).on('touchstart', mpact.getTouchPosition);
                 $(document).on('mousewheel touchmove', mpact.windowScrolling);
 
                 // hovering/clicking select sections
@@ -162,6 +164,10 @@
                 });
             },
 
+            getTouchPosition: function (e) {
+                mpact.settings.startY = e.originalEvent.touches[0].clientY;
+            },
+
             // reworked scrolling
             windowScrolling: function (e) {
                 e.preventDefault();
@@ -169,17 +175,14 @@
                 if (!mpact.settings.isScrolling) {
                     mpact.settings.isScrolling = true;
 
-                    var scrollDown,
-                        currentY,
-                        lastY;
+                    var scrollDown = false,
+                        currentY;
 
                     if (e.type === 'mousewheel') {
                         scrollDown = e.originalEvent.wheelDelta >= 0;
-                        alert('scrolling');
                     } else if (e.type === 'touchmove') {
                         currentY = e.originalEvent.touches[0].clientY;
-                        scrollDown = currentY > lastY;
-                        lastY = currentY;
+                        scrollDown = currentY > mpact.settings.startY;
                     }
 
                     if (scrollDown) {
