@@ -175,6 +175,7 @@
 
                     if (e.type === 'mousewheel') {
                         scrollDown = e.originalEvent.wheelDelta >= 0;
+                        alert('scrolling');
                     } else if (e.type === 'touchmove') {
                         currentY = e.originalEvent.touches[0].clientY;
                         scrollDown = currentY > lastY;
