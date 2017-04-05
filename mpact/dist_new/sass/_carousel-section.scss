@@ -1,0 +1,37 @@
+.screen--carousel {
+	background: #df715a;
+}
+
+.carousel-section {
+	transition: height 0.3s ease-in;
+	height: 80px;
+
+	&__name {
+		height: 80px;
+		line-height: 80px;
+		background: rgba(255, 255, 255, 0.09);
+		text-align: center;
+		font-size: 14px;
+		text-transform: uppercase;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	&__main {
+		display: none;
+		position: relative;
+	}
+
+	&--active {
+		height: calc(100% - 160px);
+
+		.carousel-section__name {
+			display: none;
+		}
+
+		.carousel-section__main {
+			display: block;
+			height: 100%;
+		}
+	}
+}
