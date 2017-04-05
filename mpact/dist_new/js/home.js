@@ -138,7 +138,7 @@
 
             slideDown: function () {
                 $('html, body').animate({
-                    scrollTop: $(document).scrollTop() + $(window).height()
+                    scrollTop: $(document).scrollTop() + mpact.settings.screens.height()
                 }, '500', 'swing', function () {
                     console.log('sliding down');
                 }).promise().then(function () {
@@ -151,7 +151,7 @@
 
             slideUp: function () {
                 $('html, body').animate({
-                    scrollTop: $(document).scrollTop() - $(window).height()
+                    scrollTop: $(document).scrollTop() - mpact.settings.screens.height()
                 }, '500', 'swing', function () {
                     console.log('sliding up');
                 }).promise().then(function () {
@@ -167,7 +167,6 @@
                 e.preventDefault();
                 if (!mpact.settings.isScrolling) {
                     mpact.settings.isScrolling = true;
-                    console.log(e.originalEvent.wheelDelta);
                     if (e.originalEvent.wheelDelta >= 0) {
                         if (mpact.checkHome() && mpact.settings.homeScreenFull) {
                             mpact.homeSlideLeft();
@@ -192,8 +191,8 @@
 
                 mpact.updateMenu();
 
-                console.log(mpact.checkHome());
-                console.log(mpact.settings.currentScreen);
+                // console.log(mpact.checkHome());
+                // console.log(mpact.settings.currentScreen);
             },
 
             // hovering host/advertiser sections
