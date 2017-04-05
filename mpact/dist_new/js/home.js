@@ -56,7 +56,7 @@
                 mpact.settings.menuBtn.on('click', mpact.onMenuClick);
 
                 // mousewheel event
-                $(window).bind('mousewheel', mpact.windowScrolling);
+                $(document).on('mousewheel touchmove', mpact.windowScrolling);
 
                 // hovering/clicking select sections
                 mpact.settings.selectSection.hover(mpact.sectionHover, mpact.sectionUnHover);
