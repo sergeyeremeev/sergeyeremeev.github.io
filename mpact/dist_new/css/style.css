@@ -444,7 +444,7 @@ body {
 
 @media (max-width:767px) {
     .btn-find-out {
-        top: 460px;
+        top: 445px;
         -webkit-transform: translate(-50%, 50%);
         transform: translate(-50%, 50%);
         padding: 15px 50px;
