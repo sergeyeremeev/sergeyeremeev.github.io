@@ -6,7 +6,7 @@
 
             settings: {
                 // screen elements and current screen
-                screens: $('[data-screen]'),
+                screens: $('.screen'),
                 currentScreen: null,
                 menuBlock: $('.menu-block'),
 
@@ -45,7 +45,7 @@
             },
 
             init: function () {
-                // set each screen height on mobile devices to window height
+                // set each screen height to window height
                 mpact.setScreenSizes();
 
                 // scrolling buttons
@@ -80,10 +80,7 @@
             },
 
             setScreenSizes: function () {
-                if (/Mobi/.test(navigator.userAgent)) {
-                    alert('on mobile');
-                    mpact.settings.screens.height($(window).height());
-                }
+                mpact.settings.screens.height($(window).height());
             },
 
             // steps functions
