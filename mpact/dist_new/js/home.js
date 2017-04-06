@@ -46,7 +46,7 @@
 
             init: function () {
                 // set each screen height to window height
-                mpact.setScreenSizes();
+                // mpact.setScreenSizes();
 
                 // scrolling buttons
                 mpact.settings.btnFeatures.on('click', mpact.homeSlideRight);
