@@ -381,7 +381,7 @@ body {
 @media (max-width:767px) {
     .btn-features {
         top: auto;
-        bottom: 155px;
+        bottom: 205px;
         -webkit-transform: translate(-50%, 50%);
         transform: translate(-50%, 50%);
         padding: 15px 40px;
@@ -990,7 +990,7 @@ body {
         top: auto;
         bottom: 0;
         width: 100vw;
-        height: 155px;
+        height: 205px;
         padding-top: 35px;
         background: #333;
         color: #fff;
@@ -1988,12 +1988,6 @@ body {
     height: 30%
 }
 
-@media (max-width:767px) {
-    .faq-menu-item {
-        display: none
-    }
-}
-
 .slide-arrows--faq {
     display: none;
     margin: 10px 0 0;
@@ -2331,5 +2325,10 @@ body {
     .screen--home-shifted .dots-block__arrows--extending .arrow-line--mobile-2 {
         height: 108px;
         top: -58px
+    }
+    .screen--about,
+    .select-section--advertiser,
+    .screen-variation__links {
+        padding-bottom: 50px;
     }
 }
