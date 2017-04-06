@@ -86,6 +86,8 @@
             // steps functions
             detectStep: function () {
                 mpact.settings.screens.each(function () {
+                    console.log($(this));
+                    console.log($(this).offset().top);
                     if ($(this).offset().top === $(document).scrollTop()) {
                         mpact.settings.currentScreen = mpact.settings.screens.index(this);
                         return {
@@ -103,6 +105,7 @@
             },
 
             checkHome: function () {
+                console.log(mpact.settings.currentScreen);
                 return mpact.settings.currentScreen === 0;
             },
 

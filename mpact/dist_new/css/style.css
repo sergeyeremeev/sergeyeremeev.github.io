@@ -1709,6 +1709,9 @@ body {
         -ms-flex-direction: column;
         flex-direction: column
     }
+    .screen-variation--advertiser {
+        display: none
+    }
     .screen-variation--advertiser .screen-variation__main {
         -webkit-box-ordinal-group: 2;
         -ms-flex-order: 1;
@@ -1928,7 +1931,8 @@ body {
 
 @media (max-width:767px) {
     .screen--faq_menu {
-        display: none;
+        visibility: hidden;
+        height: 0;
     }
 }
 
