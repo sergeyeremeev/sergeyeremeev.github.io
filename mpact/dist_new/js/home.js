@@ -81,6 +81,7 @@
 
             setScreenSizes: function () {
                 mpact.settings.screens.height($(window).height());
+                alert('current window height is ' + $(window).height());
             },
 
             // steps functions
