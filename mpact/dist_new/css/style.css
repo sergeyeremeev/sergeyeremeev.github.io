@@ -1665,11 +1665,14 @@ body {
 }
 
 .screen-variation {
-    height: 100%
+    height: 100%;
+    display: none;
 }
 
-.screen-variation--advertiser {
-    display: none
+.screen-variation.visible {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .screen-variation--toggled .screen-variation__links {

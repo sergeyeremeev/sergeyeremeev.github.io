@@ -317,8 +317,8 @@
 
             variationSelect: function () {
                 mpact.settings.selectedVariation = $(this).data('variation-select');
-                mpact.settings.screenVariation.hide();
-                $('.screen-variation--' + mpact.settings.selectedVariation).show();
+                mpact.settings.screenVariation.removeClass('visible');
+                $('.screen-variation--' + mpact.settings.selectedVariation).addClass('visible');
                 mpact.slideDown();
             }
         };
