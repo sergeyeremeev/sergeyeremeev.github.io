@@ -45,6 +45,9 @@
             },
 
             init: function () {
+                // set each screen height on mobile devices to window height
+                mpact.setScreenSizes();
+
                 // scrolling buttons
                 mpact.settings.btnFeatures.on('click', mpact.homeSlideRight);
                 mpact.settings.btnFindOut.add(mpact.settings.arrowsBtn).on('click', mpact.slideDown);
@@ -74,6 +77,13 @@
                 // location links click
                 mpact.settings.locationLinks.on('click', mpact.locationLinkClick);
                 mpact.settings.screenVariationMain.on('click', mpact.screenVariationMainClick);
+            },
+
+            setScreenSizes: function () {
+                if (/Mobi/.test(navigator.userAgent)) {
+                    alert('on mobile');
+                    mpact.settings.screens.height($(window).height());
+                }
             },
 
             // steps functions
