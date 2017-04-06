@@ -202,11 +202,12 @@
                         if (mpact.checkHome() && !mpact.settings.homeScreenFull) {
                             mpact.homeSlideRight();
                         } else {
-                            if (mpact.settings.currentScreen === 2 && mpact.settings.selectedVariation !== null) {
+                            /*if (mpact.settings.currentScreen === 2 && mpact.settings.selectedVariation !== null) {
                                 mpact.slideDown();
                             } else if (mpact.settings.currentScreen !== 2) {
                                 mpact.slideDown();
-                            }
+                            }*/
+                            mpact.slideDown();
                         }
                     }
                     setTimeout(function () {

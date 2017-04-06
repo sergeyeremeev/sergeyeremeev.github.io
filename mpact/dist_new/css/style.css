@@ -157,11 +157,6 @@ body {
     overflow: hidden
 }
 
-html,
-body {
-    height: 100%;
-}
-
 .bold {
     font-weight: 700
 }
@@ -1335,7 +1330,8 @@ body {
 
 @media (max-width:767px) {
     .about-content {
-        padding: 35px 20px 30px
+        padding: 35px 20px 30px;
+        margin-bottom: 0
     }
     .about-content h2 {
         font-size: 12px;
