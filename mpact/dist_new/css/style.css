@@ -1926,6 +1926,12 @@ body {
     }
 }
 
+@media (max-width:767px) {
+    .screen--faq_menu {
+        display: none;
+    }
+}
+
 .faq-menu-item {
     height: calc(100% / 3);
     display: -webkit-box;
