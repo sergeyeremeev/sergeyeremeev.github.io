@@ -5,10 +5,6 @@
         settings: {
             wrapper: $('.carousel-container'),
             item: $('.carousel-item'),
-            // controls: {
-            //     btnPrev: $('.carousel-prev'),
-            //     btnNext: $('.carousel-next')
-            // },
             startX: null,
             isRotating: false
         },
@@ -16,10 +12,10 @@
         init: function () {
             carousel.createControls();
             $(document).on('click', '.ctrl-btn', carousel.onDotClick);
-            carousel.settings.item.on('click', carousel.onItemClick);
 
-            // carousel.settings.controls.btnPrev.on('click', carousel.rotatePrev);
-            // carousel.settings.controls.btnNext.on('click', carousel.rotateNext);
+            if ($(document).width() >= 768) {
+                carousel.settings.item.on('click', carousel.onItemClick);
+            }
 
             carousel.settings.item.on('touchstart', carousel.getStartPosition);
             carousel.settings.item.on('touchmove', carousel.carouselRotate);
@@ -42,13 +38,11 @@
         },
 
         onItemClick: function () {
-            if ($(document).width() >= 768) {
-                var selectedItem = parseInt($(this).index() + 1);
-                console.log($(this));
-                console.log(selectedItem);
+            var selectedItem = parseInt($(this).index() + 1);
+            console.log($(this));
+            console.log(selectedItem);
 
-                $('.carousel-section--active').find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
-            }
+            $('.carousel-section--active').find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
         },
 
         onDotClick: function () {
@@ -129,13 +123,11 @@
 
         carouselRotate: function (e) {
             var currentCarousel = $('.carousel-section--active'),
-                carouselItems = currentCarousel.find('.carousel-item');
+                rotateNext = false,
+                currentX;
 
             if (!carousel.settings.isRotating) {
                 carousel.settings.isRotating = true;
-
-                var rotateNext = false,
-                    currentX;
 
                 currentX = e.originalEvent.touches[0].clientX;
                 rotateNext = currentX < carousel.settings.startX;
@@ -152,7 +144,7 @@
 
                 setTimeout(function () {
                     carousel.settings.isRotating = false;
-                }, 300);
+                }, 200);
             }
         }
     };

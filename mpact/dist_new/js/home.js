@@ -61,7 +61,17 @@
 
                 // mousewheel/touchmove events
                 $(document).on('touchstart', mpact.getTouchPosition);
-                $(document).on('mousewheel touchmove', mpact.windowScrolling);
+                $(document).on('mousewheel touchmove', function (e) {
+                    var carouselItems = $('.carousel-section--active').find('.carousel-item');
+
+                    if (e.type === 'touchmove' ) {
+                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0) {
+                            mpact.windowScrolling(e);
+                        }
+                    } else {
+                        mpact.windowScrolling(e);
+                    }
+                });
 
                 // hovering/clicking select sections
                 mpact.settings.selectSection.hover(mpact.sectionHover, mpact.sectionUnHover);
@@ -183,10 +193,6 @@
                 e.preventDefault();
 
                 var carouselItems = $('.carousel-section--active').find('.carousel-item');
-
-                if (carouselItems.is(e.target) || carouselItems.has(e.target).length > 0) {
-                    return;
-                }
 
                 if (!mpact.settings.isScrolling) {
                     mpact.settings.isScrolling = true;
