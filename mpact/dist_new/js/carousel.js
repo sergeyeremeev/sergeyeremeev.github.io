@@ -5,10 +5,12 @@
         settings: {
             wrapper: $('.carousel-container'),
             item: $('.carousel-item'),
-            controls: {
-                btnPrev: $('.carousel-prev'),
-                btnNext: $('.carousel-next')
-            }
+            // controls: {
+            //     btnPrev: $('.carousel-prev'),
+            //     btnNext: $('.carousel-next')
+            // },
+            startX: null,
+            isRotating: false
         },
 
         init: function () {
@@ -16,8 +18,11 @@
             $(document).on('click', '.ctrl-btn', carousel.onDotClick);
             carousel.settings.item.on('click', carousel.onItemClick);
 
-            carousel.settings.controls.btnPrev.on('click', carousel.rotatePrev);
-            carousel.settings.controls.btnNext.on('click', carousel.rotateNext);
+            // carousel.settings.controls.btnPrev.on('click', carousel.rotatePrev);
+            // carousel.settings.controls.btnNext.on('click', carousel.rotateNext);
+
+            carousel.settings.item.on('touchstart', carousel.getStartPosition);
+            carousel.settings.item.on('touchmove', carousel.carouselRotate);
         },
 
         createControls: function () {
@@ -37,11 +42,13 @@
         },
 
         onItemClick: function () {
-            var selectedItem = parseInt($(this).index() + 1);
-            console.log($(this));
-            console.log(selectedItem);
+            if ($(document).width() >= 768) {
+                var selectedItem = parseInt($(this).index() + 1);
+                console.log($(this));
+                console.log(selectedItem);
 
-            $('.carousel-section--active').find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
+                $('.carousel-section--active').find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
+            }
         },
 
         onDotClick: function () {
@@ -114,6 +121,39 @@
                     $this.attr('data-carousel-item', currentPos - 1);
                 }
             });
+        },
+
+        getStartPosition: function (e) {
+            carousel.settings.startX = e.originalEvent.touches[0].clientX;
+        },
+
+        carouselRotate: function (e) {
+            var currentCarousel = $('.carousel-section--active'),
+                carouselItems = currentCarousel.find('.carousel-item');
+
+            if (!carousel.settings.isRotating) {
+                carousel.settings.isRotating = true;
+
+                var rotateNext = false,
+                    currentX;
+
+                currentX = e.originalEvent.touches[0].clientX;
+                rotateNext = currentX < carousel.settings.startX;
+
+                if (rotateNext) {
+                    carousel.rotateNext();
+                } else {
+                    carousel.rotatePrev();
+                }
+
+                var currentItem = currentCarousel.find('.carousel-item[data-carousel-item="1"]').index() + 1;
+                currentCarousel.find('.ctrl-btn').removeClass('active');
+                currentCarousel.find('.ctrl-btn:nth-child(' + currentItem + ')').addClass('active');
+
+                setTimeout(function () {
+                    carousel.settings.isRotating = false;
+                }, 300);
+            }
         }
     };
 

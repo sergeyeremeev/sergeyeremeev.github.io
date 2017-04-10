@@ -182,6 +182,12 @@
             windowScrolling: function (e) {
                 e.preventDefault();
 
+                var carouselItems = $('.carousel-section--active').find('.carousel-item');
+
+                if (carouselItems.is(e.target) || carouselItems.has(e.target).length > 0) {
+                    return;
+                }
+
                 if (!mpact.settings.isScrolling) {
                     mpact.settings.isScrolling = true;
 
