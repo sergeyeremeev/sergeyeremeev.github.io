@@ -1708,13 +1708,16 @@ body {
 
 @media (max-width:767px) {
     .screen-variation {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
+        display: none;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column
+    }
+    .screen-variation.active {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
     .screen-variation--advertiser {
         display: none
