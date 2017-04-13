@@ -6,26 +6,35 @@
             wrapper: $('.carousel-container'),
             item: $('.carousel-item'),
             startX: null,
-            isRotating: false
+            isRotating: false,
+            activeSection: null
         },
 
-        init: function () {
+        init: function (section) {
+            carousel.settings.activeSection = section;
             carousel.createControls();
+            $(document).off('click', '.ctrl-btn', carousel.onDotClick);
             $(document).on('click', '.ctrl-btn', carousel.onDotClick);
 
             if ($(document).width() >= 768) {
+                carousel.settings.item.off('click', carousel.onItemClick);
                 carousel.settings.item.on('click', carousel.onItemClick);
             }
 
+            carousel.settings.item.off('touchstart', carousel.getStartPosition);
             carousel.settings.item.on('touchstart', carousel.getStartPosition);
+            carousel.settings.item.off('touchmove', carousel.carouselRotate);
             carousel.settings.item.on('touchmove', carousel.carouselRotate);
         },
 
-        createControls: function () {
-            var activeSection = $('.carousel-section--active'),
-                activeSectionDots = activeSection.find('.carousel-controls__dots'),
-                controlsLength = activeSection.find('.carousel-item').length,
+        createControls: function (section) {
+            var activeSectionDots = carousel.settings.activeSection.find('.carousel-controls__dots');
 
+            if (activeSectionDots.children().length !== 0) {
+                return;
+            }
+
+            var controlsLength = carousel.settings.activeSection.find('.carousel-item').length,
                 fragment = document.createDocumentFragment(),
                 dot = document.createElement('span');
 
@@ -42,13 +51,13 @@
             console.log($(this));
             console.log(selectedItem);
 
-            $('.carousel-section--active').find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
+            carousel.settings.activeSection.find('.ctrl-btn:nth-child(' + selectedItem + ')').trigger('click');
         },
 
         onDotClick: function () {
             var $this = $(this),
                 currentItem = $this.siblings('.active').index() + 1,
-                activeSection = $('.carousel-section--active'),
+                activeSection = carousel.settings.activeSection,
                 items = activeSection.find('.carousel-item'),
                 selectedItem = $this.index() + 1,
                 nextSteps,
@@ -82,7 +91,7 @@
         },
 
         rotatePrev: function (e) {
-            var activeSection = $('.carousel-section--active'),
+            var activeSection = carousel.settings.activeSection,
                 items = activeSection.find('.carousel-item'),
                 currentPos,
                 $this;
@@ -100,7 +109,7 @@
         },
 
         rotateNext: function () {
-            var activeSection = $('.carousel-section--active'),
+            var activeSection = carousel.settings.activeSection,
                 items = activeSection.find('.carousel-item'),
                 currentPos,
                 $this;
@@ -122,7 +131,7 @@
         },
 
         carouselRotate: function (e) {
-            var currentCarousel = $('.carousel-section--active'),
+            var currentCarousel = carousel.settings.activeSection,
                 rotateNext = false,
                 currentX;
 
@@ -150,7 +159,11 @@
     };
 
     $(function () {
-        carousel.init();
+
+        $('.faq-menu-item').on('click', function () {
+            carousel.init($(this));
+            console.log($(this));
+        });
     });
 
 })(jQuery);

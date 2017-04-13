@@ -1939,13 +1939,6 @@ body {
     }
 }
 
-@media (max-width:767px) {
-    .screen--faq_menu {
-        visibility: hidden;
-        height: 0 !important;
-    }
-}
-
 .faq-menu-item {
     height: calc(100% / 3);
     display: -webkit-box;

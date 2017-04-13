@@ -23,7 +23,7 @@
 
                 // other buttons
                 menuBtn: $('.menu-btn'),
-                arrowsBtn: $('.slide-arrows-link'),
+                arrowsBtn: $('.slide-arrows--about').find('.slide-arrows-link'),
 
                 // scrolling state
                 isScrolling: false,
@@ -40,7 +40,6 @@
 
                 // faq
                 faqMenuItems: $('.faq-menu-item'),
-                faqMenuArrows: $('.slide-arrows--faq'),
                 selectedFaq: null
             },
 
@@ -89,10 +88,6 @@
                 mpact.settings.screenVariationMain.on('click', mpact.screenVariationMainClick);
             },
 
-            setScreenSizes: function () {
-                mpact.settings.screens.height($(window).height());
-            },
-
             // steps functions
             detectStep: function () {
                 mpact.settings.screens.each(function () {
@@ -106,12 +101,6 @@
                         };
                     }
                 });
-
-                console.log($(this));
-            },
-
-            updateMenu: function () {
-
             },
 
             checkHome: function () {
@@ -214,26 +203,18 @@
                             mpact.slideUp();
                         }
                     } else {
-                        if (mpact.checkHome() && !mpact.settings.homeScreenFull) {
-                            mpact.homeSlideRight();
-                        } else {
-                            /*if (mpact.settings.currentScreen === 2 && mpact.settings.selectedVariation !== null) {
+                        if (mpact.settings.currentScreen < 2 || mpact.settings.currentScreen === 3) {
+                            if (mpact.checkHome() && !mpact.settings.homeScreenFull) {
+                                mpact.homeSlideRight();
+                            } else {
                                 mpact.slideDown();
-                            } else if (mpact.settings.currentScreen !== 2) {
-                                mpact.slideDown();
-                            }*/
-                            mpact.slideDown();
+                            }
                         }
                     }
                     setTimeout(function () {
                         mpact.settings.isScrolling = false;
                     }, 800);
                 }
-
-                mpact.updateMenu();
-
-                // console.log(mpact.checkHome());
-                // console.log(mpact.settings.currentScreen);
             },
 
             // hovering host/advertiser sections
@@ -253,13 +234,14 @@
             },
 
             sectionClick: function () {
-                if ($(document).width() > 1024) {
-                    return;
-                }
                 var $this = $(this);
-                if ($this.hasClass('hovered') || $this.closest('.select-section').hasClass('hovered')) {
+                if ($this.hasClass('hovered')) {
+                    mpact.slideDown();
                     mpact.settings.selectSection.removeClass('hovered neighbour-hovered');
                 } else {
+                    if ($(document).width() > 1024) {
+                        return;
+                    }
                     mpact.settings.selectSection.removeClass('hovered').addClass('neighbour-hovered');
                     if ($this.is('.select-section')) {
                         $this.addClass('hovered').removeClass('neighbour-hovered');
@@ -286,10 +268,14 @@
             },
 
             faqClick: function () {
+                var $this = $(this);
+                if ($this.hasClass('hovered') || $this.closest('.faq-menu-item').hasClass('hovered')) {
+                    $this.addClass('active').removeClass('inactive');
+                    $this.siblings(mpact.settings.faqMenuItems).addClass('inactive').removeClass('active');
+                }
                 if ($(document).width() > 1024) {
                     return;
                 }
-                var $this = $(this);
                 if ($this.hasClass('hovered') || $this.closest('.faq-menu-item').hasClass('hovered')) {
                     mpact.settings.faqMenuItems.removeClass('hovered neighbour-hovered');
                 } else {
@@ -331,7 +317,6 @@
                 mpact.settings.selectedVariation = $(this).data('variation-select');
                 mpact.settings.screenVariation.removeClass('visible');
                 $('.screen-variation--' + mpact.settings.selectedVariation).addClass('visible');
-                mpact.slideDown();
             }
         };
 

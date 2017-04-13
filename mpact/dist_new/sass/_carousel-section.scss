@@ -1,37 +1,74 @@
-.screen--carousel {
+.screen--faq_menu {
 	background: #df715a;
 }
 
-.carousel-section {
-	transition: height 0.3s ease-in;
-	height: 80px;
+.faq-menu-item {
+	transition: height 0.3s ease-in, background 0.3s ease-in;
+	height: calc(100% / 3);
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
 
-	&__name {
-		height: 80px;
-		line-height: 80px;
-		background: rgba(255, 255, 255, 0.09);
-		text-align: center;
-		font-size: 14px;
-		text-transform: uppercase;
-		color: #fff;
-		cursor: pointer;
+	h2 {
+		transition: height 0.3s ease-in;
 	}
 
-	&__main {
+	.carousel-section {
 		display: none;
-		position: relative;
 	}
 
-	&--active {
+	&.active {
 		height: calc(100% - 160px);
+		background: #df715a;
 
-		.carousel-section__name {
+		h2 {
 			display: none;
 		}
 
-		.carousel-section__main {
+		.slide-arrows {
+			display: none !important;
+		}
+
+		.carousel-section {
 			display: block;
-			height: 100%;
+		}
+	}
+
+	&.inactive {
+		height: 80px;
+		margin-bottom: 4px;
+		background: #df715a;
+		cursor: pointer;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		h2 {
+			width: 100%;
+			font-weight: 400;
+			height: 80px;
+			line-height: 80px;
+			background: rgba(255, 255, 255, 0.09);
+			text-align: center;
+		}
+
+		.slide-arrows {
+			display: none !important;
+		}
+	}
+
+	@media (max-width: 767px) {
+		height: 62px;
+
+		&__name {
+			height: 62px;
+			line-height: 62px;
+			font-size: 11px;
+		}
+
+		&--active {
+			height: calc(100% - 124px);
 		}
 	}
 }
