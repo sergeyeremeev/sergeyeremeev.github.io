@@ -1,5 +1,7 @@
 (function($){
 
+    'use strict';
+
     var carousel = {
 
         settings: {
@@ -13,8 +15,8 @@
         init: function (section) {
             carousel.settings.activeSection = section;
             carousel.createControls();
-            $(document).off('click', '.ctrl-btn', carousel.onDotClick);
-            $(document).on('click', '.ctrl-btn', carousel.onDotClick);
+
+            carousel.settings.activeSection.on('click', '.ctrl-btn', carousel.onDotClick);
 
             if ($(document).width() >= 768) {
                 carousel.settings.item.off('click', carousel.onItemClick);
@@ -23,6 +25,7 @@
 
             carousel.settings.item.off('touchstart', carousel.getStartPosition);
             carousel.settings.item.on('touchstart', carousel.getStartPosition);
+
             carousel.settings.item.off('touchmove', carousel.carouselRotate);
             carousel.settings.item.on('touchmove', carousel.carouselRotate);
         },
@@ -162,7 +165,6 @@
 
         $('.faq-menu-item').on('click', function () {
             carousel.init($(this));
-            console.log($(this));
         });
     });
 

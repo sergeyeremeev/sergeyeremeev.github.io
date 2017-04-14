@@ -24,6 +24,7 @@
                 // other buttons
                 menuBtn: $('.menu-btn'),
                 arrowsBtn: $('.slide-arrows--about').find('.slide-arrows-link'),
+                toContactBtn: $('.contact-page-link-button'),
 
                 // scrolling state
                 isScrolling: false,
@@ -40,7 +41,11 @@
 
                 // faq
                 faqMenuItems: $('.faq-menu-item'),
-                selectedFaq: null
+                selectedFaq: null,
+
+                // contact
+                contactForm: $('.contact-form'),
+                contactThankYou: $('.contact-thankyou')
             },
 
             init: function () {
@@ -49,7 +54,7 @@
 
                 // scrolling buttons
                 mpact.settings.btnFeatures.on('click', mpact.homeSlideRight);
-                mpact.settings.btnFindOut.add(mpact.settings.arrowsBtn).on('click', mpact.slideDown);
+                mpact.settings.btnFindOut.add(mpact.settings.arrowsBtn).add(mpact.settings.toContactBtn).on('click', mpact.slideDown);
 
                 // check current step and set menu class
                 mpact.detectStep();
@@ -86,6 +91,9 @@
                 // location links click
                 mpact.settings.locationLinks.on('click', mpact.locationLinkClick);
                 mpact.settings.screenVariationMain.on('click', mpact.screenVariationMainClick);
+
+                // on contact form submit
+                mpact.settings.contactForm.on('submit', mpact.onContactFormSubmit);
             },
 
             // steps functions
@@ -317,6 +325,11 @@
                 mpact.settings.selectedVariation = $(this).data('variation-select');
                 mpact.settings.screenVariation.removeClass('visible');
                 $('.screen-variation--' + mpact.settings.selectedVariation).addClass('visible');
+            },
+
+            onContactFormSubmit: function (e) {
+                e.preventDefault();
+                mpact.settings.contactThankYou.addClass('visible');
             }
         };
 

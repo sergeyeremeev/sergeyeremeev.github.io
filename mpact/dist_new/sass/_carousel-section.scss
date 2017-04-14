@@ -2,6 +2,31 @@
 	background: #df715a;
 }
 
+.faq-variation {
+	height: 100%;
+	display: none;
+
+	&.visible {
+		display: block;
+	}
+}
+
+.contact-page-link-button {
+	display: none;
+	width: 340px;
+	height: 70px;
+	line-height: 70px;
+	font-size: 13px;
+	font-weight: 700;
+	text-align: center;
+	color: #333;
+	text-transform: uppercase;
+	border-radius: 5px;
+	background: #fff;
+	margin-bottom: 40px;
+	cursor: pointer;
+}
+
 .faq-menu-item {
 	transition: height 0.3s ease-in, background 0.3s ease-in;
 	height: calc(100% / 3);
@@ -20,6 +45,7 @@
 	&.active {
 		height: calc(100% - 160px);
 		background: #df715a;
+		cursor: default;
 
 		h2 {
 			display: none;
@@ -30,6 +56,10 @@
 		}
 
 		.carousel-section {
+			display: block;
+		}
+
+		.contact-page-link-button {
 			display: block;
 		}
 	}

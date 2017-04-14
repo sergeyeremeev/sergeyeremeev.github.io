@@ -1360,7 +1360,8 @@ body {
     height: 100%;
     position: relative;
     -webkit-transition: all .3s;
-    transition: all .3s
+    transition: all .3s;
+    cursor: pointer;
 }
 
 .select-section img,
