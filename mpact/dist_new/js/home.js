@@ -211,7 +211,7 @@
                             mpact.slideUp();
                         }
                     } else {
-                        if (mpact.settings.currentScreen < 2 || mpact.settings.currentScreen === 3) {
+                        if (mpact.settings.currentScreen < 2 || mpact.settings.currentScreen === 3 || mpact.settings.currentScreen >= 5) {
                             if (mpact.checkHome() && !mpact.settings.homeScreenFull) {
                                 mpact.homeSlideRight();
                             } else {
