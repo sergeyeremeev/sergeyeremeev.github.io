@@ -45,7 +45,12 @@
 
                 // contact
                 contactForm: $('.contact-form'),
-                contactThankYou: $('.contact-thankyou')
+                contactThankYou: $('.contact-thankyou'),
+
+                // careers
+                careersButtons: $('.careers-info-toggle'),
+                careersSlidingContent: $('.sliding-content'),
+                careersSlidingContentClose: $('.sliding-content-close')
             },
 
             init: function () {
@@ -94,6 +99,10 @@
 
                 // on contact form submit
                 mpact.settings.contactForm.on('submit', mpact.onContactFormSubmit);
+
+                // on careers buttons click
+                mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
+                mpact.settings.careersSlidingContentClose.on('click', mpact.onCareersSlideClose);
             },
 
             // steps functions
@@ -330,6 +339,16 @@
             onContactFormSubmit: function (e) {
                 e.preventDefault();
                 mpact.settings.contactThankYou.addClass('visible');
+            },
+
+            onCareersButtonClick: function () {
+                var selectedContent = $(this).is('.careers-info-toggle--host') ? '.sliding-content__host' : '.sliding-content__advertising';
+                mpact.settings.careersSlidingContent.addClass('visible');
+                $(selectedContent).addClass('visible').siblings('.sliding-content__section').removeClass('visible');
+            },
+
+            onCareersSlideClose: function () {
+                mpact.settings.careersSlidingContent.removeClass('visible');
             }
         };
 
