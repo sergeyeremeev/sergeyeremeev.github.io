@@ -115,6 +115,7 @@
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
                 mpact.settings.careersSlidingContentClose.on('click', mpact.onCareersSlideClose);
 
+                // custom scroll bars
                 mpact.settings.careersSlidingContent.niceScroll(mpact.settings.careersScrollSettings);
                 mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
             },
@@ -363,12 +364,11 @@
                 $(selectedContent).addClass('visible').siblings('.sliding-content__section').removeClass('visible');
                 setTimeout(function () {
                     mpact.settings.careersSlidingContent.getNiceScroll().resize();
-                }, 300);
+                }, 500);
             },
 
             onCareersSlideClose: function () {
                 mpact.settings.careersSlidingContent.removeClass('visible');
-                mpact.settings.careersSlidingContent.getNiceScroll().hide();
             }
         };
 
