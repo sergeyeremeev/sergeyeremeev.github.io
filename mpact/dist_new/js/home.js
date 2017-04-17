@@ -42,19 +42,24 @@
                 // faq
                 faqMenuItems: $('.faq-menu-item'),
                 selectedFaq: null,
+                faqVariation: $('.faq-variation'),
 
                 // contact
                 contactForm: $('.contact-form'),
                 contactThankYou: $('.contact-thankyou'),
+                contactTitle: $('.contact-title'),
 
                 // careers
                 careersButtons: $('.careers-info-toggle'),
                 careersSlidingContent: $('.sliding-content'),
                 careersSlidingContentClose: $('.sliding-content-close'),
+                careersScrollSettings: {
+                    cursorcolor:"#333"
+                },
 
                 // terms
                 termsTextBlock: $('.terms-text'),
-                termsCursorSettings: {
+                termsScrollSettings: {
                     cursorcolor:"#e17964"
                 }
             },
@@ -79,14 +84,12 @@
                 $(document).on('mousewheel touchmove', function (e) {
                     var carouselItems = $('.carousel-section--active').find('.carousel-item');
 
-                    if (!mpact.settings.termsTextBlock.is(e.target) && mpact.settings.termsTextBlock.has(e.target).length === 0) {
-                        if (e.type === 'touchmove' ) {
-                            if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0) {
-                                mpact.windowScrolling(e);
-                            }
-                        } else {
+                    if (e.type === 'touchmove' ) {
+                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0) {
                             mpact.windowScrolling(e);
                         }
+                    } else {
+                        mpact.windowScrolling(e);
                     }
                 });
 
@@ -112,7 +115,8 @@
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
                 mpact.settings.careersSlidingContentClose.on('click', mpact.onCareersSlideClose);
 
-                mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsCursorSettings);
+                mpact.settings.careersSlidingContent.niceScroll(mpact.settings.careersScrollSettings);
+                mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
             },
 
             // steps functions
@@ -342,8 +346,10 @@
 
             variationSelect: function () {
                 mpact.settings.selectedVariation = $(this).data('variation-select');
-                mpact.settings.screenVariation.removeClass('visible');
+                mpact.settings.screenVariation.add(mpact.settings.faqVariation).add(mpact.settings.contactTitle).removeClass('visible');
                 $('.screen-variation--' + mpact.settings.selectedVariation).addClass('visible');
+                $('.faq-variation--' + mpact.settings.selectedVariation).addClass('visible');
+                $('.contact-title--' + mpact.settings.selectedVariation).addClass('visible');
             },
 
             onContactFormSubmit: function (e) {
@@ -355,10 +361,14 @@
                 var selectedContent = $(this).is('.careers-info-toggle--host') ? '.sliding-content__host' : '.sliding-content__advertising';
                 mpact.settings.careersSlidingContent.addClass('visible');
                 $(selectedContent).addClass('visible').siblings('.sliding-content__section').removeClass('visible');
+                setTimeout(function () {
+                    mpact.settings.careersSlidingContent.getNiceScroll().resize();
+                }, 300);
             },
 
             onCareersSlideClose: function () {
                 mpact.settings.careersSlidingContent.removeClass('visible');
+                mpact.settings.careersSlidingContent.getNiceScroll().hide();
             }
         };
 

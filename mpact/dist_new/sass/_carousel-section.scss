@@ -102,3 +102,19 @@
 		}
 	}
 }
+
+.faq-variation--2-items {
+
+	.faq-menu-item {
+		height: 50%;
+
+		&.active {
+			height: calc(100% - 80px);
+		}
+
+		&.inactive {
+			height: 80px;
+			margin-bottom: 0 !important;
+		}
+	}
+}
