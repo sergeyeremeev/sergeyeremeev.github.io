@@ -301,22 +301,21 @@
 
             faqClick: function () {
                 var $this = $(this);
-                if ($this.hasClass('hovered') || $this.closest('.faq-menu-item').hasClass('hovered')) {
+                if ($this.hasClass('inactive')) {
                     $this.addClass('active').removeClass('inactive');
                     $this.siblings(mpact.settings.faqMenuItems).addClass('inactive').removeClass('active');
+                }
+                if ($this.hasClass('hovered') && !$this.hasClass('active')) {
+                    $this.addClass('active').removeClass('inactive');
+                    $this.siblings(mpact.settings.faqMenuItems).addClass('inactive').removeClass('active');
+                    mpact.settings.faqMenuItems.removeClass('hovered neighbour-hovered');
                 }
                 if ($(document).width() > 1024) {
                     return;
                 }
-                if ($this.hasClass('hovered') || $this.closest('.faq-menu-item').hasClass('hovered')) {
-                    mpact.settings.faqMenuItems.removeClass('hovered neighbour-hovered');
-                } else {
-                    mpact.settings.faqMenuItems.removeClass('hovered').addClass('neighbour-hovered');
-                    if ($this.is('.faq-menu-item')) {
-                        $this.addClass('hovered').removeClass('neighbour-hovered');
-                    } else {
-                        $this.closest('.select-section').addClass('hovered').removeClass('neighbour-hovered');
-                    }
+                if (!$this.hasClass('hovered')) {
+                    $this.siblings(mpact.settings.faqMenuItems).removeClass('hovered').addClass('neighbour-hovered');
+                    $this.addClass('hovered').removeClass('neighbour-hovered');
                 }
             },
 

@@ -27,6 +27,13 @@
 			}
 		}
 	}
+
+	@media (max-width: 1024px) {
+
+		h2 {
+			font-size: 16px;
+		}
+	}
 }
 
 .contact-form {
@@ -84,6 +91,21 @@
 			cursor: pointer;
 		}
 	}
+
+	@media (max-width: 1024px) {
+		max-width: 480px;
+		width: 100%;
+		padding: 0 20px;
+
+		.input-container {
+			width: 100%;
+		}
+
+		input {
+			height: 52px;
+			line-height: 52px;
+		}
+	}
 }
 
 .address-details {
@@ -98,6 +120,10 @@
 	a {
 		text-decoration: underline;
 		color: inherit;
+	}
+
+	@media (max-width: 1024px) {
+		font-size: 12px;
 	}
 }
 

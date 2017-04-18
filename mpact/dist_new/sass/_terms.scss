@@ -1,6 +1,10 @@
 .screen--terms {
 	background: #df715a;
 	overflow: hidden;
+
+	.logo-container--corner {
+		z-index: 2;
+	}
 }
 
 .terms-content {
@@ -24,6 +28,14 @@
 
 	.logo-container {
 		z-index: 2;
+	}
+
+	@media (max-width: 1024px) {
+		padding-top: 40px;
+
+		h2 {
+			font-size: 16px;
+		}
 	}
 }
 
@@ -52,6 +64,17 @@
 	h4 {
 		font-weight: 700;
 		font-size: 18px;
+	}
+
+	@media (max-width: 1024px) {
+		width: 100%;
+		max-width: 640px;
+		padding: 0 20px;
+		font-size: 13px;
+
+		h4 {
+			font-size: 15px;
+		}
 	}
 }
 

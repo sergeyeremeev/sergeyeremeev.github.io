@@ -39,6 +39,25 @@
 		width: 680px;
 		text-align: center;
 	}
+
+	@media (max-width: 1024px) {
+
+		h2 {
+			font-size: 38px;
+		}
+
+		span {
+			font-size: 13px;
+			margin-bottom: 15px;
+		}
+
+		p {
+			font-size: 14px;
+			width: 100%;
+			max-width: 640px;
+			padding: 0 20px;
+		}
+	}
 }
 
 .careers-logo {
@@ -66,6 +85,17 @@
 		font-weight: 700;
 		width: 680px;
 		text-align: center;
+	}
+
+	@media (max-width: 1024px) {
+		padding-bottom: 30px;
+
+		p {
+			font-size: 14px;
+			width: 100%;
+			max-width: 640px;
+			padding: 0 20px;
+		}
 	}
 }
 
@@ -120,6 +150,7 @@
 }
 
 .sliding-content {
+	width: 920px;
 	max-height: calc(100% - 100px);
 	position: absolute;
 	bottom: 0;
@@ -215,5 +246,25 @@
 	img {
 		width: 100%;
 		height: 100%;
+	}
+}
+
+
+
+@media (max-width: 1024px) {
+
+	.quotes-block {
+		font-size: 14px;
+		line-height: 1.5;
+		margin-bottom: 30px;
+	}
+
+	.careers-buttons {
+		margin-top: 40px;
+	}
+
+	.sliding-content {
+		padding: 40px;
+		width: 708px;
 	}
 }
