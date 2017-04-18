@@ -61,7 +61,9 @@
                 termsTextBlock: $('.terms-text'),
                 termsScrollSettings: {
                     cursorcolor:"#e17964"
-                }
+                },
+
+                touchScrollBlockedContent: $('.touch-scroll-block-content')
             },
 
             init: function () {
@@ -82,11 +84,15 @@
                 // mousewheel/touchmove events
                 $(document).on('touchstart', mpact.getTouchPosition);
                 $(document).on('mousewheel touchmove', function (e) {
-                    var carouselItems = $('.carousel-section--active').find('.carousel-item');
+                    var carouselItems = $('.faq-menu-item.active').find('.carousel-item');
 
                     if (e.type === 'touchmove' ) {
-                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0) {
+                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0
+                            && !mpact.settings.touchScrollBlockedContent.is(e.target)
+                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
                             mpact.windowScrolling(e);
+                        } else {
+                            console.log('touching carousel item');
                         }
                     } else {
                         mpact.windowScrolling(e);
