@@ -133,7 +133,7 @@
                     if ($(this).offset().top === $(document).scrollTop()) {
                         mpact.settings.currentScreen = mpact.settings.screens.index(this);
                         mpact.settings.currentScreenName = $(this).attr('data-screen');
-                        console.log(mpact.settings.currentScreen, mpact.settings.currentScreenName);
+                        // console.log(mpact.settings.currentScreen, mpact.settings.currentScreenName);
                     }
                 });
             },
