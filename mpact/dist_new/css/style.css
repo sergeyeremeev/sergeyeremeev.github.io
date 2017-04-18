@@ -799,9 +799,11 @@ body {
 .menu-list li {
     margin-bottom: 25px;
     cursor: pointer;
-    padding-left: 60px;
+    padding-left: 80px;
     position: relative;
-    transition: all .3s
+    transition: transform 0.3s ease-in;
+    -webkit-transform: translateX(-20px);
+    transform: translateX(-20px);
 }
 
 .menu-list li::before {
@@ -815,11 +817,12 @@ body {
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
     -webkit-transition: all .3s;
-    transition: all .3s
+    transition: transform 0.3s ease-in;
 }
 
 .menu-list li.selected {
-    padding-left: 80px;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
     font-weight: 700;
     color: #df715a
 }

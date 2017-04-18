@@ -8,12 +8,14 @@
                 // screen elements and current screen
                 screens: $('.screen'),
                 currentScreen: null,
+                currentScreenName: null,
                 menuBlock: $('.menu-block'),
+
+                menuNavButtons: $('[data-section-menu]'),
 
                 // home screen, home state, buttons
                 homeScreen: $('.screen--home'),
                 homeScreenFull: false,
-
 
                 // home screen animating elements
                 btnFeatures: $('.btn-features'),
@@ -37,7 +39,7 @@
                 screenVariation: $('.screen-variation'),
                 screenVariationMain: $('.screen-variation__main'),
                 variationLinks: $('[data-variation-select]'),
-                selectedVariation: null,
+                selectedVariation: 'host',
 
                 // faq
                 faqMenuItems: $('.faq-menu-item'),
@@ -67,8 +69,6 @@
             },
 
             init: function () {
-                // set each screen height to window height
-                // mpact.setScreenSizes();
 
                 // scrolling buttons
                 mpact.settings.btnFeatures.on('click', mpact.homeSlideRight);
@@ -81,6 +81,9 @@
                 // menu button click
                 mpact.settings.menuBtn.on('click', mpact.onMenuClick);
 
+                // menu navigation
+                mpact.settings.menuNavButtons.on('click', mpact.navigateToSection);
+
                 // mousewheel/touchmove events
                 $(document).on('touchstart', mpact.getTouchPosition);
                 $(document).on('mousewheel touchmove', function (e) {
@@ -91,8 +94,6 @@
                             && !mpact.settings.touchScrollBlockedContent.is(e.target)
                             && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
                             mpact.windowScrolling(e);
-                        } else {
-                            console.log('touching carousel item');
                         }
                     } else {
                         mpact.windowScrolling(e);
@@ -129,28 +130,35 @@
             // steps functions
             detectStep: function () {
                 mpact.settings.screens.each(function () {
-                    console.log($(this));
-                    console.log($(this).offset().top);
                     if ($(this).offset().top === $(document).scrollTop()) {
                         mpact.settings.currentScreen = mpact.settings.screens.index(this);
-                        return {
-                            screen: $(this).data('screen'),
-                            variation: mpact.selectedVariation
-                        };
+                        mpact.settings.currentScreenName = $(this).attr('data-screen');
+                        console.log(mpact.settings.currentScreen, mpact.settings.currentScreenName);
                     }
                 });
             },
 
             checkHome: function () {
-                console.log(mpact.settings.currentScreen);
+                // console.log(mpact.settings.currentScreen);
                 return mpact.settings.currentScreen === 0;
             },
 
             setMenuClass: function () {
-                if (mpact.checkHome()) {
+                if (mpact.settings.currentScreen === 0) {
                     mpact.settings.menuBtn.removeClass('menu-btn--white');
                 } else {
                     mpact.settings.menuBtn.addClass('menu-btn--white');
+                }
+
+                mpact.settings.menuNavButtons.removeClass('selected');
+                var currentMenuItem = $('[data-section-menu="' + mpact.settings.currentScreenName + '"]');
+
+                if (mpact.settings.currentScreenName === 'host_advertiser-content') {
+                    currentMenuItem = $('[data-menu-variation="' + mpact.settings.selectedVariation + '"]');
+                }
+
+                if (currentMenuItem) {
+                    currentMenuItem.addClass('selected');
                 }
             },
 
@@ -159,6 +167,27 @@
                 e.preventDefault();
                 mpact.settings.menuBtn.toggleClass('menu-btn--cross');
                 mpact.settings.menuBlock.toggleClass('menu-block--visible');
+            },
+
+            navigateToSection: function () {
+                var $this = $(this),
+                    selectedSection = $this.attr('data-section-menu'),
+                    selectedVariation = $this.attr('data-menu-variation');
+
+                if (selectedVariation) {
+                    mpact.variationSelect(selectedVariation);
+                }
+
+                var scrollTo = $('[data-screen="' + selectedSection + '"]').offset().top;
+
+                $('html, body').animate({
+                    scrollTop: scrollTo
+                }, '500', 'swing', function () {
+                    // console.log('navigating to section: ' + selectedSection);
+                }).promise().then(function () {
+                    mpact.detectStep();
+                    mpact.setMenuClass();
+                });
             },
 
             // sliding functions
@@ -189,11 +218,9 @@
                 $('html, body').animate({
                     scrollTop: $(document).scrollTop() + mpact.settings.screens.height()
                 }, '500', 'swing', function () {
-                    console.log('sliding down');
+                    // console.log('sliding down');
                 }).promise().then(function () {
-                    if (mpact.settings.currentScreen !== (mpact.settings.screens.length - 1)) {
-                        mpact.settings.currentScreen += 1;
-                    }
+                    mpact.detectStep();
                     mpact.setMenuClass();
                 });
             },
@@ -202,11 +229,9 @@
                 $('html, body').animate({
                     scrollTop: $(document).scrollTop() - mpact.settings.screens.height()
                 }, '500', 'swing', function () {
-                    console.log('sliding up');
+                    // console.log('sliding up');
                 }).promise().then(function () {
-                    if (mpact.settings.currentScreen !== 0) {
-                        mpact.settings.currentScreen -= 1;
-                    }
+                    mpact.detectStep();
                     mpact.setMenuClass();
                 });
             },
@@ -350,8 +375,12 @@
                 }
             },
 
-            variationSelect: function () {
-                mpact.settings.selectedVariation = $(this).data('variation-select');
+            variationSelect: function (variation) {
+                if ($(this).is('[data-variation-select]')) {
+                    mpact.settings.selectedVariation = $(this).data('variation-select');
+                } else {
+                    mpact.settings.selectedVariation = variation;
+                }
                 mpact.settings.screenVariation.add(mpact.settings.faqVariation).add(mpact.settings.contactTitle).removeClass('visible');
                 $('.screen-variation--' + mpact.settings.selectedVariation).addClass('visible');
                 $('.faq-variation--' + mpact.settings.selectedVariation).addClass('visible');
