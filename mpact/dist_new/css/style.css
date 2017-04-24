@@ -957,7 +957,8 @@ body {
 }
 
 .home-text-block__title {
-    font-size: 46px
+    font-size: 48px;
+    text-transform: uppercase;
 }
 
 .home-text-block__text {

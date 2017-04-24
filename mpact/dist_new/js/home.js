@@ -50,10 +50,12 @@
                 contactForm: $('.contact-form'),
                 contactThankYou: $('.contact-thankyou'),
                 contactTitle: $('.contact-title'),
+                inputContainer: $('.input-container'),
 
                 // careers
                 careersButtons: $('.careers-info-toggle'),
                 careersSlidingContent: $('.sliding-content'),
+                careersSlidingContentContainer: $('.sliding-content__container'),
                 careersSlidingContentClose: $('.sliding-content-close'),
                 careersScrollSettings: {
                     cursorcolor:"#333"
@@ -80,6 +82,9 @@
 
                 // menu button click
                 mpact.settings.menuBtn.on('click', mpact.onMenuClick);
+
+                // menu outside click
+                $(document).on('click', mpact.onOutsideMenuClick);
 
                 // menu navigation
                 mpact.settings.menuNavButtons.on('click', mpact.navigateToSection);
@@ -117,13 +122,16 @@
 
                 // on contact form submit
                 mpact.settings.contactForm.on('submit', mpact.onContactFormSubmit);
+                mpact.settings.inputContainer.find('input').on('focus', mpact.onInputFocus);
+                mpact.settings.inputContainer.find('input').on('blur', mpact.onInputBlur);
 
                 // on careers buttons click
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
                 mpact.settings.careersSlidingContentClose.on('click', mpact.onCareersSlideClose);
 
                 // custom scroll bars
-                mpact.settings.careersSlidingContent.niceScroll(mpact.settings.careersScrollSettings);
+                mpact.settings.careersSlidingContentContainer.niceScroll(mpact.settings.careersScrollSettings);
+                console.log(mpact.settings.careersSlidingContentContainer);
                 mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
             },
 
@@ -167,6 +175,15 @@
                 e.preventDefault();
                 mpact.settings.menuBtn.toggleClass('menu-btn--cross');
                 mpact.settings.menuBlock.toggleClass('menu-block--visible');
+            },
+
+            onOutsideMenuClick: function (e) {
+                if (mpact.settings.menuBlock.hasClass('menu-block--visible')) {
+                    if (!mpact.settings.menuBlock.is(e.target) && mpact.settings.menuBlock.has(e.target).length === 0
+                            && !mpact.settings.menuBtn.is(e.target) && mpact.settings.menuBtn.has(e.target).length === 0) {
+                        mpact.settings.menuBtn.trigger('click');
+                    }
+                }
             },
 
             navigateToSection: function () {
@@ -223,6 +240,8 @@
                     mpact.detectStep();
                     mpact.setMenuClass();
                 });
+
+                mpact.onCareersSlideClose();
             },
 
             slideUp: function () {
@@ -234,6 +253,8 @@
                     mpact.detectStep();
                     mpact.setMenuClass();
                 });
+
+                mpact.onCareersSlideClose();
             },
 
             getTouchPosition: function (e) {
@@ -387,6 +408,24 @@
                 $('.contact-title--' + mpact.settings.selectedVariation).addClass('visible');
             },
 
+            onInputFocus: function () {
+                var $this = $(this),
+                    $thisContainer = $this.closest('.input-container');
+                console.log($this);
+                if (!$thisContainer.hasClass('filled')) {
+                    $thisContainer.addClass('filled');
+                }
+            },
+
+            onInputBlur: function () {
+                var $this = $(this),
+                    $thisContainer = $this.closest('.input-container');
+                    console.log($this.val());
+                if ($this.val() === '') {
+                    $thisContainer.removeClass('filled');
+                }
+            },
+
             onContactFormSubmit: function (e) {
                 e.preventDefault();
                 mpact.settings.contactThankYou.addClass('visible');
@@ -397,7 +436,7 @@
                 mpact.settings.careersSlidingContent.addClass('visible');
                 $(selectedContent).addClass('visible').siblings('.sliding-content__section').removeClass('visible');
                 setTimeout(function () {
-                    mpact.settings.careersSlidingContent.getNiceScroll().resize();
+                    mpact.settings.careersSlidingContentContainer.getNiceScroll().resize();
                 }, 500);
             },
 

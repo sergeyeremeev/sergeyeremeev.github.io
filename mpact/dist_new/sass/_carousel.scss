@@ -7,6 +7,12 @@
 		width: 100%;
 		height: 100%;
 	}
+
+    @media (max-width: 767px) {
+        height: 100%;
+        max-height: calc(100% - 68px);
+        min-height: 366px;
+    }
 }
 
 .carousel-container {
@@ -16,7 +22,8 @@
 }
 
 .carousel-item {
-	transition: transform 0.3s ease-in;
+	transition: transform 0.4s;
+	transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	width: 483px;
 	height: 483px;
 	background: url(../img/carousel_bg.png) no-repeat;

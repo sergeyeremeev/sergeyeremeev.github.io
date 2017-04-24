@@ -42,21 +42,26 @@
 	.input-container {
 		margin-bottom: 6px;
 		width: 560px;
+		position: relative;
 
-		:-moz-placeholder {
-			color: inherit;
+		.field-label {
+			position: absolute;
+			top: 25px;
+			left: 50%;
+			transform: translateX(-50%);
+			z-index: 1;
+			font-weight: 300;
+			color: rgba(255, 255, 255, 0.9);
+			font-size: 14px;
+			pointer-events: none;
+			transition: transform 0.3s ease-in-out;
 		}
 
-		::-webkit-input-placeholder {
-			color: inherit;
-		}
+		&.filled {
 
-		:-ms-input-placeholder {
-			color: inherit;
-		}
-
-		::-moz-placeholder {
-			color: inherit;
+			.field-label {
+				transform: translate(-50%, -20px);
+			}
 		}
 	}
 
@@ -70,7 +75,7 @@
 		background: rgba(255, 255, 255, 0.16);
 		font-family: inherit;
 		color: inherit;
-		font-size: 14px;
+		font-size: 15px;
 		text-transform: uppercase;
 		text-align: center;
 		border: none;

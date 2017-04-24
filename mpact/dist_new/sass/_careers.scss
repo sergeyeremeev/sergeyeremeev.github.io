@@ -170,22 +170,26 @@
 
 .sliding-content {
 	width: 920px;
+	height: 100%;
 	max-height: calc(100% - 100px);
 	position: absolute;
 	bottom: 0;
 	left: 50%;
-	transform: translate(-50%, 100%);
+	transform: translate(-50%, 120%);
 	background: #fff;
 	color: #333;
-	padding: 60px;
 	text-align: center;
 	z-index: 2;
+	box-shadow: 0 0 40px 0 #000;
 	transition: transform 0.3s ease-in;
 
 	&.visible {
 		transform: translate(-50%, 0);
-		//top: auto;
-		//bottom: 0;
+	}
+
+	&__container {
+		height: calc(100% - 90px);
+		margin: 60px 60px 30px;
 	}
 
 	h2 {
@@ -281,8 +285,12 @@
 	}
 
 	.sliding-content {
-		padding: 40px;
 		width: 708px;
+
+		&__container {
+			height: calc(100% - 65px);
+			margin: 40px 40px 15px;
+		}
 	}
 }
 
