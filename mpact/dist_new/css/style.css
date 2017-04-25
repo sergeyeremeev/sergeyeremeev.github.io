@@ -839,13 +839,15 @@ body {
 
 .social-links,
 .tv-container {
-    -webkit-transform: translateX(-50%)
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%)
 }
 
 .social-links {
     position: absolute;
     left: 50%;
     bottom: 12%;
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%)
 }
 
@@ -877,6 +879,7 @@ body {
     position: absolute;
     top: 155px;
     left: 50vw;
+    -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
     width: 620.5px;
     height: 390.55px;
@@ -1029,11 +1032,13 @@ body {
     top: 130px;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
+    -webkit-transform: translateX(300px);
     transform: translateX(300px);
 }
 
 .dots-block__content.appears {
     opacity: 1;
+    -webkit-transform: translateX(0);
     transform: translateX(0);
 }
 
@@ -1321,11 +1326,13 @@ body {
     margin-bottom: 100px;
     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
     opacity: 0;
+    -webkit-transform: translateY(50%);
     transform: translateY(50%);
 }
 
 .about-content.appears {
     opacity: 1;
+    -webkit-transform: translateY(0);
     transform: translateY(0);
 }
 
@@ -2015,12 +2022,14 @@ body {
 .screen-variation--host .screen-variation__text {
     left: 45%;
     opacity: 0;
+    -webkit-transform: translate(0, -150%);
     transform: translate(0, -150%);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .screen-variation--host .screen-variation__text.appears {
     opacity: 1;
+    -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
 }
 
@@ -2046,12 +2055,14 @@ body {
     right: 45%;
     text-align: right;
     opacity: 0;
+    -webkit-transform: translate(0, -150%);
     transform: translate(0, -150%);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .screen-variation--advertiser .screen-variation__text.appears {
     opacity: 1;
+    -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
 }
 
@@ -2198,11 +2209,13 @@ body {
 .screen--home .home-text-block {
     -webkit-transition: 0.5s transform ease-in-out, .5s opacity;
     transition: 0.5s transform ease-in-out, .5s opacity;
+    -webkit-transform: translate(-50%, 200px);
     transform: translate(-50%, 200px);
     opacity: 0;
 }
 
 .screen--home .home-text-block.appears {
+    -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
     opacity: 1;
 }
@@ -2223,11 +2236,13 @@ body {
 .screen--home .btn-features {
     -webkit-transition: 0.5s transform ease-in-out, opacity .2s;
     transition: 0.5s transform ease-in-out, opacity .2s;
+    -webkit-transform: translate(-50%, 200px);
     transform: translate(-50%, 200px);
     opacity: 0;
 }
 
 .screen--home .btn-features.appears {
+    -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
     opacity: 1;
 }
