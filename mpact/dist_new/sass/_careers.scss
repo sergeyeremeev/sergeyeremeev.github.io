@@ -18,6 +18,7 @@
 	span,
 	p {
 		z-index: 2;
+        position: relative;
 	}
 
 	h2 {
@@ -193,9 +194,11 @@
 	z-index: 2;
 	box-shadow: 0 0 40px 0 #000;
 	transition: transform 0.4s ease-in;
+    pointer-events: none;
 
 	&.visible {
 		transform: translate(-50%, 0);
+        pointer-events: auto;
 	}
 
 	&__container {

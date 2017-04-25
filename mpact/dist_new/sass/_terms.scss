@@ -24,10 +24,12 @@
 		margin-bottom: 25px;
 		text-transform: uppercase;
 		z-index: 2;
+		position: relative;
 	}
 
 	.logo-container {
 		z-index: 2;
+		position: relative;
 	}
 
 	@media (max-width: 1024px) {
@@ -47,6 +49,8 @@
 	z-index: 2;
 	font-size: 14px;
 	padding-right: 15px;
+    height: 100%;
+    max-height: calc(100% - 205px);
 
 	p {
 		margin: 15px 0;
@@ -71,11 +75,16 @@
 		max-width: 640px;
 		padding: 0 20px;
 		font-size: 13px;
+        max-height: calc(100% - 190px);
 
 		h4 {
 			font-size: 15px;
 		}
 	}
+
+    @media (max-width: 1024px) {
+        max-height: calc(100% - 160px);
+    }
 }
 
 .nicescroll-rails {

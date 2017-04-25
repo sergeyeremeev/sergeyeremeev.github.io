@@ -71,13 +71,26 @@
 				transform: translate(-50%, -20px);
 			}
 		}
+
+        @media (max-width: 767px) {
+
+            .field-label {
+                top: 16px;
+            }
+
+            &.filled {
+
+                .field-label {
+                    transform: translate(-50%, -17px);
+                }
+            }
+        }
 	}
 
 	input {
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		height: 70px;
-		line-height: 70px;
 		width: 100%;
 		border-radius: 4px;
 		background: rgba(255, 255, 255, 0.16);
@@ -164,6 +177,7 @@
 	.logo-container,
 	h2,
 	span{
+        position: relative;
 		z-index: 2;
 	}
 

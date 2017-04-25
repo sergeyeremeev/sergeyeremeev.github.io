@@ -73,6 +73,7 @@
 
 		.carousel-section {
 			display: block;
+            max-height: calc(100% - 110px);
 		}
 
 		.contact-page-link-button {
@@ -113,6 +114,11 @@
 
 		&.active {
 			height: calc(100% - 128px);
+
+            .carousel-section {
+                display: block;
+                max-height: calc(100% - 73px);
+            }
 		}
 
 		&.inactive {
