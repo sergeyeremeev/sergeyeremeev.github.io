@@ -67,7 +67,9 @@
                     cursorcolor:"#e17964"
                 },
 
-                touchScrollBlockedContent: $('.touch-scroll-block-content')
+                touchScrollBlockedContent: $('.touch-scroll-block-content'),
+
+                movingContent: $('.moving-content')
             },
 
             init: function () {
@@ -101,7 +103,10 @@
                             mpact.windowScrolling(e);
                         }
                     } else {
-                        mpact.windowScrolling(e);
+                        if (!mpact.settings.touchScrollBlockedContent.is(e.target)
+                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
+                            mpact.windowScrolling(e);
+                        }
                     }
                 });
 
@@ -133,6 +138,8 @@
                 mpact.settings.careersSlidingContentContainer.niceScroll(mpact.settings.careersScrollSettings);
                 console.log(mpact.settings.careersSlidingContentContainer);
                 mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
+
+                $(window).on('load', mpact.homeScreenContentAppear);
             },
 
             // steps functions
@@ -144,6 +151,35 @@
                         // console.log(mpact.settings.currentScreen, mpact.settings.currentScreenName);
                     }
                 });
+                mpact.animateContent();
+            },
+
+            animateContent: function () {
+                var animatedElement = null;
+                switch (mpact.settings.currentScreenName) {
+                    case 'about':
+                        animatedElement = $('.about-content');
+                        break;
+                    case 'host_advertiser':
+                        animatedElement = mpact.settings.selectSection.children();
+                        break;
+                    case 'host_advertiser-content':
+                        animatedElement = mpact.settings.screenVariationMain.children();
+                        break;
+                    case 'faq_menu':
+                        animatedElement = mpact.settings.faqMenuItems.children('h2');
+                        break;
+                    case 'contact':
+                        animatedElement = $('.contact-content');
+                        break;
+                    case 'careers':
+                        animatedElement = $('.careers-bottom').children();
+                        break;
+                    default:
+                        break;
+                }
+
+                (animatedElement && !animatedElement.hasClass('appears')) && animatedElement.addClass('appears');
             },
 
             checkHome: function () {
@@ -212,6 +248,7 @@
                 mpact.settings.homeScreen.addClass('screen--home-shifting');
                 setTimeout(function () {
                     mpact.settings.homeScreen.removeClass('screen--home-shifting').addClass('screen--home-shifted');
+                    $('.dots-block__content').addClass('appears');
                 }, 300);
                 setTimeout(function () {
                     mpact.settings.dotsArrows.addClass('dots-block__arrows--extending');
@@ -442,6 +479,10 @@
 
             onCareersSlideClose: function () {
                 mpact.settings.careersSlidingContent.removeClass('visible');
+            },
+
+            homeScreenContentAppear: function () {
+                $('.screen--home').find(mpact.settings.movingContent).addClass('appears');
             }
         };
 

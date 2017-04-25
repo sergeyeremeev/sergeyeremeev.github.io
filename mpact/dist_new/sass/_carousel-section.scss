@@ -44,7 +44,14 @@
 
 	h2 {
 		text-align: center;
-		transition: height 0.3s ease-in;
+		transition: height 0.3s ease-in, opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+		opacity: 0;
+		transform: translateX(-100%);
+
+		&.appears {
+			opacity: 1;
+			transform: translateX(0);
+		}
 	}
 
 	.carousel-section {

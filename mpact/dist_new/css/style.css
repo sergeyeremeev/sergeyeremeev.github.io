@@ -189,7 +189,8 @@ body {
 
 .screen {
     position: relative;
-    height: 100vh
+    height: 100vh;
+    overflow: hidden;
 }
 
 .screen--home {
@@ -951,8 +952,6 @@ body {
     position: absolute;
     top: calc(390.55px + 155px + 10px);
     left: 50vw;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
     text-align: center
 }
 
@@ -1019,7 +1018,15 @@ body {
 .dots-block__content {
     position: absolute;
     left: calc(50% + 10px);
-    top: 130px
+    top: 130px;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateX(300px);
+}
+
+.dots-block__content.appears {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .dots-content-block {
@@ -1303,7 +1310,15 @@ body {
 .about-content {
     text-align: center;
     max-width: 860px;
-    margin-bottom: 100px
+    margin-bottom: 100px;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    opacity: 0;
+    transform: translateY(50%);
+}
+
+.about-content.appears {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .about-content h2 {
@@ -1372,7 +1387,7 @@ body {
 .select-section__text {
     position: absolute;
     -webkit-transition: all .3s;
-    top: 50%
+    top: 50%;
 }
 
 .select-section img {
@@ -1443,12 +1458,30 @@ body {
 
 .select-section--host img {
     left: 0;
+    -webkit-transform: translate(-100%, -50%) rotateY(180deg);
+    transform: translate(-100%, -50%) rotateY(180deg);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.select-section--host img.appears {
+    opacity: 0.3;
     -webkit-transform: translate(-42%, -50%) rotateY(180deg);
-    transform: translate(-42%, -50%) rotateY(180deg)
+    transform: translate(-42%, -50%) rotateY(180deg);
 }
 
 .select-section--host .select-section__text {
-    left: 45%
+    left: 45%;
+    -webkit-transform: translate(0, -150%);
+    transform: translate(0, -150%);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, left 0.3s ease-in-out;
+}
+
+.select-section--host .select-section__text.appears {
+    opacity: 1;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
 }
 
 @media (max-width:1400px) {
@@ -1519,13 +1552,31 @@ body {
 
 .select-section--advertiser img {
     right: 0;
+    -webkit-transform: translate(100%, -50%);
+    transform: translate(100%, -50%);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.select-section--advertiser img.appears {
+    opacity: 0.3;
     -webkit-transform: translate(42%, -50%);
-    transform: translate(42%, -50%)
+    transform: translate(42%, -50%);
 }
 
 .select-section--advertiser .select-section__text {
     right: 45%;
-    text-align: right
+    text-align: right;
+    -webkit-transform: translate(0, -150%);
+    transform: translate(0, -150%);
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out, right 0.3s ease-in-out;
+}
+
+.select-section--advertiser .select-section__text.appears {
+    opacity: 1;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
 }
 
 @media (max-width:1400px) {
@@ -1577,7 +1628,7 @@ body {
 }
 
 .select-section--advertiser.neighbour-hovered .select-section__text {
-    left: 50px;
+    right: 50px;
     opacity: .5
 }
 
@@ -1694,7 +1745,7 @@ body {
 
 .screen-variation--toggled.screen-variation--host img {
     -webkit-transform: translate(-100%, -50%) rotateY(180deg);
-    transform: translate(-100%, -50%) rotateY(180deg)
+    transform: translate(-100%, -50%) rotateY(180deg);
 }
 
 .screen-variation--toggled.screen-variation--advertiser img {
@@ -1912,12 +1963,28 @@ body {
 
 .screen-variation--host img {
     left: 0;
+    -webkit-transform: translate(-100%, -50%) rotateY(180deg);
+    transform: translate(-100%, -50%) rotateY(180deg);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.screen-variation--host img.appears {
+    opacity: 0.3;
     -webkit-transform: translate(-42%, -50%) rotateY(180deg);
-    transform: translate(-42%, -50%) rotateY(180deg)
+    transform: translate(-42%, -50%) rotateY(180deg);
 }
 
 .screen-variation--host .screen-variation__text {
-    left: 45%
+    left: 45%;
+    opacity: 0;
+    transform: translate(0, -150%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.screen-variation--host .screen-variation__text.appears {
+    opacity: 1;
+    transform: translate(0, -50%);
 }
 
 .screen-variation--advertiser .screen-variation__main {
@@ -1926,13 +1993,29 @@ body {
 
 .screen-variation--advertiser img {
     right: 0;
+    -webkit-transform: translate(100%, -50%);
+    transform: translate(100%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.screen-variation--advertiser img.appears {
+    opacity: 0.3;
     -webkit-transform: translate(42%, -50%);
-    transform: translate(42%, -50%)
+    transform: translate(42%, -50%);
 }
 
 .screen-variation--advertiser .screen-variation__text {
     right: 45%;
-    text-align: right
+    text-align: right;
+    opacity: 0;
+    transform: translate(0, -150%);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.screen-variation--advertiser .screen-variation__text.appears {
+    opacity: 1;
+    transform: translate(0, -50%);
 }
 
 @media (max-width:1400px) {
@@ -2070,10 +2153,21 @@ body {
     }
 }
 
-.screen--home .home-text-block,
 .screen--home .logo-container--home-main {
     -webkit-transition: .5s opacity;
     transition: .5s opacity
+}
+
+.screen--home .home-text-block {
+    -webkit-transition: 0.5s transform ease-in-out, .5s opacity;
+    transition: 0.5s transform ease-in-out, .5s opacity;
+    transform: translate(-50%, 200px);
+    opacity: 0;
+}
+
+.screen--home .home-text-block.appears {
+    transform: translate(-50%, 0);
+    opacity: 1;
 }
 
 .screen--home .tv-container,
@@ -2090,8 +2184,15 @@ body {
 }
 
 .screen--home .btn-features {
-    -webkit-transition: opacity .2s;
-    transition: opacity .2s
+    -webkit-transition: 0.5s transform ease-in-out, opacity .2s;
+    transition: 0.5s transform ease-in-out, opacity .2s;
+    transform: translate(-50%, 200px);
+    opacity: 0;
+}
+
+.screen--home .btn-features.appears {
+    transform: translate(-50%, 0);
+    opacity: 1;
 }
 
 .screen--home .btn-find-out {

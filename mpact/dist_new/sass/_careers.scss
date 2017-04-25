@@ -95,6 +95,17 @@
 	position: relative;
 	padding-bottom: 40px;
 
+	& > * {
+		transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+		opacity: 0;
+		transform: translateX(-50%);
+
+		&.appears {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+
 	p {
 		font-size: 15px;
 		font-weight: 700;
@@ -181,7 +192,7 @@
 	text-align: center;
 	z-index: 2;
 	box-shadow: 0 0 40px 0 #000;
-	transition: transform 0.3s ease-in;
+	transition: transform 0.4s ease-in;
 
 	&.visible {
 		transform: translate(-50%, 0);
