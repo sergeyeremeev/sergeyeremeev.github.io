@@ -157,7 +157,7 @@ var jQuery = __webpack_require__(3);
         }
     };
 
-    $(function () {
+    $(window).on('load', function () {
         hulq_landing.init();
     });
 
