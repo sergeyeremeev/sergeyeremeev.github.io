@@ -194,7 +194,7 @@ body {
 }
 
 .screen--home {
-    width: 150vw
+    width: 100vw
 }
 
 .screen .home-content {
@@ -207,15 +207,13 @@ body {
     position: absolute;
     right: 0;
     top: 0;
+    transform: translateX(100%);
     background: #df715a;
     box-shadow: inset 10px 0 30px -10px #333, inset -8px 0 30px -10px #333;
     will-change: transform;
 }
 
 @media (max-width:767px) {
-    .screen--home {
-        width: calc(200vw - 42px)
-    }
     .screen .dots-block {
         width: calc(100vw - 42px)
     }
@@ -1034,6 +1032,7 @@ body {
     opacity: 0;
     -webkit-transform: translateX(300px);
     transform: translateX(300px);
+    will-change: transform, opacity;
 }
 
 .dots-block__content.appears {
@@ -1119,7 +1118,7 @@ body {
     display: none;
     position: absolute;
     top: 130px;
-    right: calc(75vw + 10px);
+    right: calc(25vw + 10px);
     z-index: 2
 }
 
@@ -1234,7 +1233,7 @@ body {
     }
     .dots-block__arrows {
         top: 86px;
-        right: calc(100vw - 110px)
+        right: calc(50vw - 110px)
     }
     .dots-block__arrows .home-arrow {
         height: 123px
@@ -1243,7 +1242,7 @@ body {
 
 @media (max-width:767px) {
     .dots-block__arrows {
-        right: calc(150vw - 7px);
+        right: calc(60vw - 7px);
         top: 70px
     }
     .dots-block__arrows .home-arrow {
@@ -2282,8 +2281,8 @@ body {
 }
 
 .screen--home-shifting .dots-block {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%)
+    -webkit-transform: translateX(0);
+    transform: translateX(0)
 }
 
 .screen--home-shifting .btn-features {
@@ -2369,8 +2368,8 @@ body {
 }
 
 .screen--home-shifted .dots-block {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%)
+    -webkit-transform: translateX(0);
+    transform: translateX(0)
 }
 
 .screen--home-shifted .btn-features {
