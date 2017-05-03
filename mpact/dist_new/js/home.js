@@ -94,21 +94,9 @@
                 // mousewheel/touchmove events
                 $(document).on('touchstart', mpact.getTouchPosition);
                 $(document).on('mousewheel touchmove', function (e) {
-                    var carouselItems = $('.faq-menu-item.active').find('.carousel-item');
-
-                    if (e.type === 'touchmove' ) {
-                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0
-                            && !mpact.settings.touchScrollBlockedContent.is(e.target)
-                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
-                            mpact.windowScrolling(e);
-                        }
-                    } else {
-                        if (!mpact.settings.touchScrollBlockedContent.is(e.target)
-                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
-                            mpact.windowScrolling(e);
-                        }
-                    }
+                    e.preventDefault();
                 });
+                $(document).on('mousewheel.fancyScroll touchmove.fancyScroll', mpact.manageScroll);
 
                 // hovering/clicking select sections
                 mpact.settings.selectSection.hover(mpact.sectionHover, mpact.sectionUnHover);
@@ -140,6 +128,23 @@
                 mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
 
                 $(window).on('load', mpact.homeScreenContentAppear);
+            },
+
+            manageScroll: function (e) {
+                var carouselItems = $('.faq-menu-item.active').find('.carousel-item');
+
+                if (e.type === 'touchmove' ) {
+                    if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0
+                        && !mpact.settings.touchScrollBlockedContent.is(e.target)
+                        && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
+                        mpact.windowScrolling(e);
+                    }
+                } else {
+                    if (!mpact.settings.touchScrollBlockedContent.is(e.target)
+                        && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
+                        mpact.windowScrolling(e);
+                    }
+                }
             },
 
             // steps functions
@@ -448,24 +453,29 @@
             onInputFocus: function () {
                 var $this = $(this),
                     $thisContainer = $this.closest('.input-container');
-                console.log($this);
                 if (!$thisContainer.hasClass('filled')) {
                     $thisContainer.addClass('filled');
                 }
+                $('.container').addClass('no-overflow');
+                $(document).off('touchmove.fancyScroll');
             },
 
             onInputBlur: function () {
                 var $this = $(this),
                     $thisContainer = $this.closest('.input-container');
-                    console.log($this.val());
                 if ($this.val() === '') {
                     $thisContainer.removeClass('filled');
                 }
+                $('.container').removeClass('no-overflow');
+                var scrollTo = $('[data-screen="contact"]').offset().top;
+                $(document).scrollTop(scrollTo);
+                $(document).on('touchmove.fancyScroll', mpact.manageScroll);
             },
 
             onContactFormSubmit: function (e) {
                 e.preventDefault();
                 mpact.settings.contactThankYou.addClass('visible');
+                mpact.onInputBlur.call(document.getElementsByClassName('input-container')[0]);
             },
 
             onCareersButtonClick: function () {
