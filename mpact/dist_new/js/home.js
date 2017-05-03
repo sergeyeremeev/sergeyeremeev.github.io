@@ -124,17 +124,7 @@
                 mpact.settings.inputContainer.find('input').on('blur', mpact.onInputBlur);
 
                 // return to top of contact section on window close
-                $(window).resize(function () {
-                    var newWindowWidth = $(window).width(),
-                        newWindowHeight = $(window).height();
-
-                    if( newWindowHeight > mpact.lastWindowHeight && newWindowWidth === mpact.lastWindowWidth ) {
-                        mpact.onInputBlur.call(document.getElementsByClassName('input-container')[0]);
-                    }
-
-                    mpact.lastWindowWidth = newWindowWidth;
-                    mpact.lastWindowHeight = newWindowHeight;
-                });
+                $(window).resize(mpact.onKeyboardClose);
 
                 // on careers buttons click
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
@@ -493,7 +483,19 @@
             onContactFormSubmit: function (e) {
                 e.preventDefault();
                 mpact.settings.contactThankYou.addClass('visible');
-                mpact.onInputBlur.call(document.getElementsByClassName('input-container')[0]);
+                mpact.onInputBlur.call(document.querySelector('.input-container input'));
+            },
+
+            onKeyboardClose: function () {
+                var newWindowWidth = $(window).width(),
+                    newWindowHeight = $(window).height();
+
+                if( newWindowHeight > mpact.lastWindowHeight && newWindowWidth === mpact.lastWindowWidth ) {
+                    mpact.onInputBlur.call(document.querySelector('.input-container input'));
+                }
+
+                mpact.lastWindowWidth = newWindowWidth;
+                mpact.lastWindowHeight = newWindowHeight;
             },
 
             onCareersButtonClick: function () {
