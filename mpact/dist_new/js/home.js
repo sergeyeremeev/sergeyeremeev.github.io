@@ -4,6 +4,11 @@
 
         var mpact = {
 
+            // check if touch device
+            isTouch: ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0),
+            lastWindowWidth: $(window).width(),
+            lastWindowHeight: $(window).height(),
+
             settings: {
                 // screen elements and current screen
                 screens: $('.screen'),
@@ -117,6 +122,19 @@
                 mpact.settings.contactForm.on('submit', mpact.onContactFormSubmit);
                 mpact.settings.inputContainer.find('input').on('focus', mpact.onInputFocus);
                 mpact.settings.inputContainer.find('input').on('blur', mpact.onInputBlur);
+
+                // return to top of contact section on window close
+                $(window).resize(function () {
+                    var newWindowWidth = $(window).width(),
+                        newWindowHeight = $(window).height();
+
+                    if( newWindowHeight > mpact.lastWindowHeight && newWindowWidth === mpact.lastWindowWidth ) {
+                        mpact.onInputBlur.call(document.getElementsByClassName('input-container')[0]);
+                    }
+
+                    mpact.lastWindowWidth = newWindowWidth;
+                    mpact.lastWindowHeight = newWindowHeight;
+                });
 
                 // on careers buttons click
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
