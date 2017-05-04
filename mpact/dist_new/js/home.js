@@ -4,6 +4,11 @@
 
         var mpact = {
 
+            // check if touch device
+            isTouch: ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0),
+            lastWindowWidth: $(window).width(),
+            lastWindowHeight: $(window).height(),
+
             settings: {
                 // screen elements and current screen
                 screens: $('.screen'),
@@ -94,21 +99,9 @@
                 // mousewheel/touchmove events
                 $(document).on('touchstart', mpact.getTouchPosition);
                 $(document).on('mousewheel touchmove', function (e) {
-                    var carouselItems = $('.faq-menu-item.active').find('.carousel-item');
-
-                    if (e.type === 'touchmove' ) {
-                        if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0
-                            && !mpact.settings.touchScrollBlockedContent.is(e.target)
-                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
-                            mpact.windowScrolling(e);
-                        }
-                    } else {
-                        if (!mpact.settings.touchScrollBlockedContent.is(e.target)
-                            && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
-                            mpact.windowScrolling(e);
-                        }
-                    }
+                    e.preventDefault();
                 });
+                $(document).on('mousewheel.fancyScroll touchmove.fancyScroll', mpact.manageScroll);
 
                 // hovering/clicking select sections
                 mpact.settings.selectSection.hover(mpact.sectionHover, mpact.sectionUnHover);
@@ -130,6 +123,9 @@
                 mpact.settings.inputContainer.find('input').on('focus', mpact.onInputFocus);
                 mpact.settings.inputContainer.find('input').on('blur', mpact.onInputBlur);
 
+                // return to top of contact section on window close
+                $(window).resize(mpact.onKeyboardClose);
+
                 // on careers buttons click
                 mpact.settings.careersButtons.on('click', mpact.onCareersButtonClick);
                 mpact.settings.careersSlidingContentClose.on('click', mpact.onCareersSlideClose);
@@ -140,6 +136,23 @@
                 mpact.settings.termsTextBlock.niceScroll(mpact.settings.termsScrollSettings);
 
                 $(window).on('load', mpact.homeScreenContentAppear);
+            },
+
+            manageScroll: function (e) {
+                var carouselItems = $('.faq-menu-item.active').find('.carousel-item');
+
+                if (e.type === 'touchmove' ) {
+                    if (!carouselItems.is(e.target) && carouselItems.has(e.target).length === 0
+                        && !mpact.settings.touchScrollBlockedContent.is(e.target)
+                        && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
+                        mpact.windowScrolling(e);
+                    }
+                } else {
+                    if (!mpact.settings.touchScrollBlockedContent.is(e.target)
+                        && mpact.settings.touchScrollBlockedContent.has(e.target).length === 0) {
+                        mpact.windowScrolling(e);
+                    }
+                }
             },
 
             // steps functions
@@ -448,24 +461,41 @@
             onInputFocus: function () {
                 var $this = $(this),
                     $thisContainer = $this.closest('.input-container');
-                console.log($this);
                 if (!$thisContainer.hasClass('filled')) {
                     $thisContainer.addClass('filled');
                 }
+                $('.container').addClass('no-overflow');
+                $(document).off('touchmove.fancyScroll');
             },
 
             onInputBlur: function () {
                 var $this = $(this),
                     $thisContainer = $this.closest('.input-container');
-                    console.log($this.val());
                 if ($this.val() === '') {
                     $thisContainer.removeClass('filled');
                 }
+                $('.container').removeClass('no-overflow');
+                var scrollTo = $('[data-screen="contact"]').offset().top;
+                $(document).scrollTop(scrollTo);
+                $(document).on('touchmove.fancyScroll', mpact.manageScroll);
             },
 
             onContactFormSubmit: function (e) {
                 e.preventDefault();
                 mpact.settings.contactThankYou.addClass('visible');
+                mpact.onInputBlur.call(document.querySelector('.input-container input'));
+            },
+
+            onKeyboardClose: function () {
+                var newWindowWidth = $(window).width(),
+                    newWindowHeight = $(window).height();
+
+                if( newWindowHeight > mpact.lastWindowHeight && newWindowWidth === mpact.lastWindowWidth ) {
+                    mpact.onInputBlur.call(document.querySelector('.input-container input'));
+                }
+
+                mpact.lastWindowWidth = newWindowWidth;
+                mpact.lastWindowHeight = newWindowHeight;
             },
 
             onCareersButtonClick: function () {
