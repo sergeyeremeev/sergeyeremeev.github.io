@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "assets";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10487,7 +10487,9 @@ return jQuery;
     };
 
     $(() => {
-        landing_cars.init();
+        if ($('.landing-main').length) {
+            landing_cars.init();
+        }
     });
 })(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a);
 
@@ -10570,30 +10572,140 @@ return jQuery;
     };
 
     $(() => {
-        landing_text.init();
+        if ($('.landing-main').length) {
+            landing_text.init();
+        }
     });
 })(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a);
 
 /***/ }),
 /* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
+var _this = this;
+
+
+
+($ => {
+
+    const landingV2 = {
+
+        elements: {
+            animatedBlocks: $('.landing-2__image').add('.landing-2__title').add('.landing-2__cut').add('.landing-info-block').add('.notify-form__container').add('.landing-2__bottom-content').add('.landing-2__bottom-title').add('.landing-2__bottom-cut'),
+            notifyFloatingForm: $('.notify-form--head'),
+            notifyFloatingButton: $('.fake-notify--toggler'),
+            fakeNotifyButton: $('.fake-notify').not('.fake-notify--toggler'),
+            bigTitle: $('.landing-2__bottom-title'),
+            bottomCut: $('.landing-2__bottom-cut'),
+            bottomBg: $('.landing-2__bottom-bg')
+        },
+
+        init: function () {
+            $(window).on('resize', landingV2.setBottomCutSize);
+
+            $(window).on('scroll.animate-content-2', landingV2.animateContent);
+            $(window).on('scroll', landingV2.toggleNotifyGoTo);
+
+            $(window).scroll();
+            $(window).resize();
+
+            landingV2.elements.fakeNotifyButton.on('click', landingV2.notifyTriggerSubmit);
+            landingV2.elements.notifyFloatingButton.on('click', landingV2.notifyFormToggle);
+            $(document).on('click', landingV2.hideFloatingForm);
+        },
+
+        setBottomCutSize: () => {
+            const bigTitleSize = landingV2.elements.bigTitle.height();
+
+            landingV2.elements.bottomCut.height(bigTitleSize);
+            landingV2.elements.bottomBg.attr('style', 'top: ' + bigTitleSize + 'px;');
+        },
+
+        animateContent: () => {
+            const scrolledHeight = $(document).scrollTop(),
+                  windowHeight = $(window).height();
+
+            landingV2.elements.animatedBlocks.each(function () {
+                const $this = $(this);
+
+                if (scrolledHeight + windowHeight + $this.height() / 2 >= $this.offset().top) {
+                    $this.addClass('animate');
+                }
+            });
+
+            if (!landingV2.elements.animatedBlocks.not('.animate').length) {
+                $(window).off('scroll.animate-content-2');
+            }
+        },
+
+        toggleNotifyGoTo: () => {
+            const scrolledHeight = $(document).scrollTop();
+
+            if (scrolledHeight >= $(window).height() + 60 && scrolledHeight < $('.landing-info-block--4').offset().top) {
+                landingV2.elements.notifyFloatingForm.addClass('appear');
+            } else {
+                landingV2.elements.notifyFloatingForm.removeClass('appear toggled');
+            }
+        },
+
+        notifyFormToggle: function (e) {
+            e.preventDefault();
+
+            const $this = $(this),
+                  $thisForm = $this.closest('.notify-form');
+
+            if ($thisForm.hasClass('toggled')) {
+                $this.siblings('input[type="submit"]').trigger('click');
+            } else {
+                $this.closest('.notify-form').addClass('toggled');
+            }
+        },
+
+        hideFloatingForm: function (e) {
+            if (landingV2.elements.notifyFloatingForm.hasClass('toggled') && !landingV2.elements.notifyFloatingForm.is(e.target) && landingV2.elements.notifyFloatingForm.has(e.target).length === 0) {
+                landingV2.elements.notifyFloatingForm.removeClass('toggled');
+            }
+        },
+
+        notifyTriggerSubmit: e => {
+            e.preventDefault();
+            $(_this).siblings('input[type="submit"]').trigger('click');
+        }
+    };
+
+    $(window).on('load', () => {
+        if ($('.landing-section--2').length) {
+            landingV2.init();
+        }
+    });
+})(__WEBPACK_IMPORTED_MODULE_0_jquery___default.a);
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_css__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__app_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_landing_text_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__js_landing_cars_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__js_landing_v2_js__ = __webpack_require__(3);
 // CSS imports
 
 
 // JS imports
+
+
 
 
 
