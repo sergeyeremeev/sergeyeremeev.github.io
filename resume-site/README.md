@@ -1,1 +1,0 @@
-My Resume/Portfolio Website, built with React
